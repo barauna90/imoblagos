@@ -6,11 +6,18 @@ const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 if (!supabaseUrl || !supabaseAnonKey) {
   console.error('Missing Supabase environment variables. Please check your .env file.');
   console.error('Required variables: VITE_SUPABASE_URL, VITE_SUPABASE_ANON_KEY');
+  console.error('The app will continue with mock data, but database features will not work.');
 }
 
 export const supabase = createClient(
   supabaseUrl || 'http://localhost:54321', 
-  supabaseAnonKey || 'dummy-key'
+  supabaseAnonKey || 'dummy-key',
+  {
+    auth: {
+      persistSession: true,
+      autoRefreshToken: true,
+    },
+  }
 );
 
 // Tipos para o banco de dados
