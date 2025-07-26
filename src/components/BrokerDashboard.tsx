@@ -11,14 +11,6 @@ const BrokerDashboard: React.FC = () => {
 
   const loading = vendasLoading || corretoresLoading || empreendimentosLoading;
 
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center py-8">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
-      </div>
-    );
-  }
-
   const brokerStats = useMemo(() => {
     if (!profile) return null;
 
@@ -124,6 +116,14 @@ const BrokerDashboard: React.FC = () => {
     
     return empStats;
   }, [vendas, profile, empreendimentos, corretores]);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center py-8">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+      </div>
+    );
+  }
 
   if (!brokerStats) return null;
 
