@@ -19,10 +19,15 @@ const Login: React.FC = () => {
       const { error } = await signIn(email, password);
       
       if (error) {
-        setError('Email ou senha incorretos');
+        if (error.message.includes('Invalid login credentials')) {
+          setError('Email ou senha incorretos');
+        } else {
+          setError('Erro ao fazer login. Verifique sua conexão.');
+        }
       }
     } catch (err) {
-      setError('Erro ao fazer login. Tente novamente.');
+      console.error('Login error:', err);
+      setError('Erro ao fazer login. Verifique sua conexão com o banco de dados.');
     } finally {
       setLoading(false);
     }
