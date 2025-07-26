@@ -98,6 +98,14 @@ const Login: React.FC = () => {
             {loading ? 'Entrando...' : 'Entrar'}
           </button>
         </form>
+
+        <div className="mt-6 p-4 bg-blue-50 rounded-lg">
+          <h3 className="text-sm font-medium text-blue-900 mb-2">Credenciais de Teste</h3>
+          <div className="text-xs text-blue-700 space-y-1">
+            <p><strong>Admin:</strong> admin@empresa.com / admin123</p>
+            <p className="text-blue-600">Use estas credenciais para testar o sistema</p>
+          </div>
+        </div>
       </div>
     </div>
   );

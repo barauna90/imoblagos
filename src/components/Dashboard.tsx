@@ -7,16 +7,6 @@ const Dashboard: React.FC = () => {
   const { corretores, loading: corretoresLoading } = useCorretores();
   const { empreendimentos, loading: empreendimentosLoading } = useEmpreendimentos();
 
-  const loading = vendasLoading || corretoresLoading || empreendimentosLoading;
-
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center py-8">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
-      </div>
-    );
-  }
-
   const stats = useMemo(() => {
     const allComissoes = vendas.flatMap(venda => venda.comissoes || []);
     
@@ -96,6 +86,17 @@ const Dashboard: React.FC = () => {
       };
     }).sort((a, b) => b.salesCount - a.salesCount);
   }, [vendas, empreendimentos]);
+
+  const loading = vendasLoading || corretoresLoading || empreendimentosLoading;
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center py-8">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+        <p className="ml-3 text-gray-600">Carregando dados do dashboard...</p>
+      </div>
+    );
+  }
 
   const StatCard: React.FC<{
     title: string;
